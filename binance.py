@@ -20,8 +20,8 @@ interval = "1m"
 
 klines = client.futures_historical_klines(symbol,
                                           interval, start_str=None, end_str=None, limit=50)
-opaopa = []
-opaopa1 = []
+signal_one = []
+signal_two = []
 print('----------')
 print(klines)
 print(klines[-1])
@@ -37,11 +37,11 @@ for item in r_klines:
         low = float(item[3])
         higt = float(klines[-i-2][2])
         if higt < low:
-            opaopa.append({'high': higt, 'low': low, 'percent':low / (higt / 100)})
+            signal_one.append({'high': higt, 'low': low, 'percent':low / (higt / 100)})
         higt1 = float(item[2])
         low1 = float(klines[-i - 2][3])
         if higt1 > low1:
-            opaopa1.append({'high': higt1, 'low': low1, 'percent': low1 / (higt1 / 100)})
+            signal_two.append({'high': higt1, 'low': low1, 'percent': low1 / (higt1 / 100)})
         i+=1
     except IndexError:
         break
@@ -76,5 +76,5 @@ for dt in klines:
             low2_tr = False
     if tri == 4:
         tri = 0
-print(opaopa)
-print(opaopa1)
+print(signal_one)
+print(signal_two)
